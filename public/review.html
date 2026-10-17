@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Photos Swipe</title>
+  <link rel="icon" href="icon32.png">
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="review.html"><span class="brand-icon">▧</span><span>Photos<span class="brand-light"> / Swipe</span></span></a>
+    <div class="connection"><span id="connection-dot" class="dot"></span><span id="account">Not connected</span></div>
+    <button id="connect" class="quiet">Connect</button>
+  </header>
+
+  <main>
+    <section class="heading">
+      <h1>Review photos</h1>
+      <div class="mode">Date taken · newest first</div>
+    </section>
+
+    <section class="stats" aria-label="Review statistics">
+      <div><span class="stat-label">Reviewed</span><strong id="reviewed">0</strong></div>
+      <div><span class="stat-label">Moved to trash</span><strong id="trashed">0</strong><span class="stat-note">Recoverable in Google Photos</span></div>
+      <div><span class="stat-label">Estimated storage removed</span><strong><span id="storage">0.000</span><small>GB</small></strong><span id="unknown" class="stat-note">Based on known account storage usage</span></div>
+    </section>
+
+    <div class="review-toolbar"><span id="queue-label">Current photo</span><label class="toggle"><input id="filter" type="checkbox" checked><span>Only photos using storage</span></label></div>
+
+    <section class="review-layout">
+      <div class="viewer" id="viewer">
+        <img id="photo" alt="Current photo to review" hidden referrerpolicy="no-referrer">
+        <div id="empty" class="empty"><span class="empty-icon">▧</span><h2 id="empty-title">Connect Google Photos</h2><p id="empty-description">Open a signed-in Google Photos tab, then select Connect. Keep the tab open while reviewing.</p><button id="open-photos" class="primary">Open Google Photos ↗</button></div>
+        <span id="image-loading" class="image-loading" hidden>Loading photo…</span>
+        <div id="photo-caption" class="photo-caption" hidden><span id="photo-date"></span></div>
+      </div>
+      <aside class="details">
+        
+        <h2 id="filename">No photo selected</h2>
+        <dl>
+          <div><dt>File size</dt><dd id="file-size">—</dd></div>
+          <div><dt>File type <span class="hint" title="Inferred from the file extension, not a verified MIME type">ⓘ</span></dt><dd id="file-type">—</dd></div>
+          <div><dt>Date taken</dt><dd id="taken">—</dd></div>
+        </dl>
+        <div class="quota-card"><span class="stat-label">Google account storage</span><strong id="quota-status">—</strong><p id="quota-size">—</p></div>
+        <p id="blocked" class="blocked" hidden>Google links this photo to other entries, or its deletion key is missing. Deletion is blocked. You can keep or skip it.</p>
+        <a id="view-google" class="text-link" target="_blank" rel="noreferrer" hidden>View in Google Photos ↗</a>
+      </aside>
+    </section>
+
+    <div class="actions">
+      <button id="undo" class="secondary" disabled>↶ <span>Undo</span><kbd>Z</kbd></button>
+      <div class="decision-actions"><button id="trash" class="trash" aria-keyshortcuts="ArrowLeft" disabled><kbd>←</kbd>Move to trash</button><button id="keep" class="keep" aria-keyshortcuts="ArrowRight" disabled>Keep photo<kbd>→</kbd></button></div>
+      <button id="skip" class="secondary" disabled><span>Skip</span> ↗</button>
+    </div>
+    <div id="notice" class="notice" role="status" aria-live="polite"></div>
+    <div id="queue-status" class="notice" role="status" aria-live="polite" hidden></div>
+    <div id="pending" class="pending" hidden><strong>A queued operation needs verification. You can keep reviewing.</strong><span>Queued deletions will resume after this result is checked. Stats count only confirmed changes.</span><button id="reconcile" class="quiet">Check Google Photos again</button></div>
+    <footer><span>This extension never empties the trash.</span><button id="reset" class="text-button">Reset history &amp; stats</button></footer>
+  </main>
+
+  <dialog id="connection-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><h2>Choose a Google Photos tab</h2><p>Keep it open while you review. We use its existing signed-in session.</p><select id="source-tabs" aria-label="Google Photos tab"></select><div class="dialog-actions"><button id="dialog-open" class="secondary">Open Google Photos ↗</button><button id="dialog-connect" class="primary">Connect selected tab</button></div></dialog>
+  <dialog id="reset-dialog"><h2>Reset this account’s progress?</h2><p>This clears local review history and stats. It does not restore trashed photos or change your Google Photos library.</p><p id="reset-account"></p><div class="dialog-actions"><button id="cancel-reset" class="secondary">Cancel</button><button id="confirm-reset" class="danger">Reset history &amp; stats</button></div></dialog>
+  <script type="module" src="review.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+# Advance after saving trash intent, before Google responds
+
+Trash and restore run through a durable per-account queue so reviewing another photo does not wait for Google requests or verification. Save each request before advancing, serialize local writes with queue completions, and count only verified outcomes; this preserves recovery and accurate statistics while making navigation independent of Google latency. Interrupted sending requests become uncertain on restart and are never automatically resent, whereas definitely-unsent requests may resume after account validation. Undo cancels unsent requests or requests restoration after an in-flight trash result is verified.

@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Google Photos Swipe",
+  "version": "0.2.3",
+  "description": "Review your photos: right to keep, left to move to trash. Local progress and storage estimates.",
+  "permissions": ["storage", "unlimitedStorage", "scripting", "tabs"],
+  "host_permissions": ["https://photos.google.com/*"],
+  "background": {"service_worker": "background.js", "type": "module"},
+  "action": {"default_title": "Open Google Photos Swipe", "default_icon": {"16": "icon16.png", "32": "icon32.png", "128": "icon128.png"}},
+  "icons": {"16": "icon16.png", "32": "icon32.png", "128": "icon128.png"},
+  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' blob: https://*.googleusercontent.com https://photos.fife.usercontent.google.com data:;"}
+}
